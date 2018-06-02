@@ -2,6 +2,7 @@ package rmi.client;
 
 import rmi.server.input.Order;
 import rmi.server.output.Bill;
+import rmi.server.output.NotEnoughItemsException;
 import rmi.server.StoreServer;
 
 import java.rmi.Naming;
@@ -18,8 +19,9 @@ public class ClientApp {
              Order order = new Order("1234", "telewizor", 7, "12345667");
              Bill bill = server.orderItems(order);
              System.out.println(bill);    
-        }
-        catch (Exception ex ){
+        } catch (NotEnoughItemsException neie) {
+        	System.out.println(neie);
+        } catch (Exception ex ){
              System.out.println(ex);
         }
     }
